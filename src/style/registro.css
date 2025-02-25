@@ -1,0 +1,99 @@
+@charset "UTF-8";
+body{
+    position: relative;
+    background-color: #e6e8f1;
+    font-family: "Urbanist", serif;
+    width: 100vw;
+    height: 100vh;
+}
+.sign_up{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+    background: #e6e8f1;
+    box-shadow:  41px 41px 82px #c0c1c7, -41px -41px 82px #f6f8ff;
+    border: 1px solid #c0c1c738;
+    padding: 2rem;
+    border-radius: 30px;
+}
+.sign_up h1{
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: "Voces", serif;
+}
+.sign_up form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.sign_up form input{
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 5px; 
+    border-radius: 10px;
+    font-size: 18px;
+    border: none;
+}
+.sign_up form .gender {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.sign_up form .gender input{
+    padding: 0;
+    width: 13px;
+    height: 13px;
+    margin: 0;
+    cursor: pointer;
+}
+input[type="radio"] {
+    appearance: none;
+    border: 2px solid #555;
+    border-radius: 10%;
+    outline: none;
+    background-color: white;
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.3s ease-in-out;
+}
+input[type="radio"]:checked#masc {
+    background-color: #091da1;
+}
+input[type="radio"]:checked#fem {
+    background-color: #ff33dc;
+}
+.sign_up form .password input{
+    margin-bottom: 10px;
+}
+.sign_up form input[type="submit"] {
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+.sign_up form input[type="submit"]:hover{
+    background-color: #97f7ba;
+}
+.sign_up form .password{
+    position: relative;
+}
+.hidden{
+    opacity: 0;
+}
+.reveal {
+    display: flex;
+    position: absolute;
+    left: 0;
+    width: 99%;
+    justify-content: right;
+}
+.reveal .olho, .reveal .olho-2{
+    position: fixed;
+}
+#reveal-first {
+    bottom: 76%;
+}
+#reveal-second {
+    bottom: 25%;
+}
