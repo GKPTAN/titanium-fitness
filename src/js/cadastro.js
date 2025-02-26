@@ -93,7 +93,7 @@ function validarForm() {
         valido = false;
     }
 
-    if (senha < 6 || senha > 15) {
+    if (senha.length < 6 || senha.length > 15) {
         senhaInput.setCustomValidity("sua senha precisa ter no mínimo 6 caracteres e no máximo 15 caracteres!");
         senhaInput.reportValidity();
         valido = false;
