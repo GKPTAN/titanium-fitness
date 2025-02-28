@@ -1,0 +1,85 @@
+<?php
+    $email = $_GET['email'] ?? '';
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Voces&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            position: relative;
+            background-color: #e6e8f1;
+            font-family: "Urbanist", serif;
+            width: 100vw;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            font-family: "Voces", serif;
+            background-color: black;
+            color: white;
+            padding: 30px 0px;
+            margin-bottom: 30px;
+        }
+        p {
+            text-align: center;
+        }
+        .confirm-email {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50px;
+            background: #e6e8f1;
+            box-shadow:  41px 41px 82px #c0c1c7, -41px -41px 82px #f6f8ff;
+            border: 1px solid #c0c1c738;
+            padding: 2rem;
+            border-radius: 30px;
+        }
+        .confirm-email form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .confirm-email form input {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px 5px; 
+            border-radius: 10px;
+            font-size: 18px;
+            border: none;
+        }
+        .confirm-email form input[type="submit"] {
+            cursor: pointer;
+            background-color: #ffffff;
+            transition: all 0.3s ease-in-out;
+        }
+        .confirm-email form input[type="submit"]:hover{
+            background-color: #97f7ba;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verificação de e-mail</h1>
+    <p>Um código de verificação foi enviado para: <?php echo htmlspecialchars($email); ?></p>
+    <div class="confirm-email">
+        <form action="http://localhost/0.php" method="post">
+            <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
+            <label for="codigo">Código de Confirmação</label>
+            <input type="text" name="codigo" id="codigo" required>
+            <input type="submit" value="Verificar">
+        </form>
+    </div>
+</body>
+</html>

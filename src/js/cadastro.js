@@ -1,7 +1,8 @@
 const olho1 = document.getElementsByClassName("olho")[0];
 
 olho1.addEventListener("click", () => {
-    olho1.src = olho1.src.includes("src/image/esconder.svg") ? "src/image/revelar.svg" : "src/image/esconder.svg";
+    olho1.src = olho1.src.includes("https://gkptan.github.io/titanium-fitness/esconder.svg") ? "https://gkptan.github.io/titanium-fitness/revelar.svg" : "https://gkptan.github.io/titanium-fitness/esconder.svg";
+    console.log("chegou");
     const password1 = document.getElementById("password");
 
     if (password1.type === "password") {
@@ -14,7 +15,7 @@ olho1.addEventListener("click", () => {
 const olho2 = document.getElementsByClassName("olho-2")[0];
 
 olho2.addEventListener("click", () => {
-    olho2.src = olho2.src.includes("src/image/esconder.svg") ? "src/image/revelar.svg" : "src/image/esconder.svg";
+    olho2.src = olho2.src.includes("https://gkptan.github.io/titanium-fitness/esconder.svg") ? "https://gkptan.github.io/titanium-fitness/revelar.svg" : "https://gkptan.github.io/titanium-fitness/esconder.svg";
     const password2 = document.getElementById("confirm_password");
 
     if (password2.type === "password") {

@@ -28,12 +28,31 @@ h1 {
     margin-bottom: 20px;
 }
 
+.login-form {
+    position: relative;
+}
+
+.reveal {
+    display: flex;
+    justify-content: right;
+    position: absolute;
+    width: 99%;
+    bottom: 50%;
+}
+
+#revelar {
+    position: fixed;
+    cursor: pointer;
+}
+
 input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
 }
 
 .btn {
@@ -42,7 +61,7 @@ input {
     color: white;
     padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: 16px;
     cursor: pointer;
 }
@@ -59,6 +78,11 @@ input {
     color: #ff5733;
     font-weight: bold;
     text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.register a:hover {
+    color: #091da1;
 }
 
 .logo-container {
@@ -86,4 +110,9 @@ input {
     margin-top: 30px;
     font-size: 12px;
     color: #555;
+}
+.error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
