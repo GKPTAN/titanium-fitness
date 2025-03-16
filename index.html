@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Voces&display=swap" rel="stylesheet">
     <title>Academia Titanium Fitness - Apresentação</title>
     <style>
         *{
@@ -11,7 +14,8 @@
             box-sizing: border-box;
         }
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "Urbanist", serif;
+            background-color: #e6e8f1;
         }
         header {
             display: flex;
@@ -21,6 +25,7 @@
             padding: 15px 2rem;
         }
         header h1 {
+            font-family: "Voces", serif;
             color: white;
         }
         header nav ul {
@@ -35,6 +40,42 @@
             padding: 10px;
             border-radius: 30px;
         }
+        .msg-cookies{
+            width: 48%;
+            background-color: #fff;
+            position: fixed;
+            bottom: 5%;
+            left: 50%;
+            transform: translate(-50%);
+            border-radius: 15px;
+            display: none;
+        }
+        .msg-cookies.mostrar{
+            display: block;
+        }
+        .msg-cookies .cookies-txt{
+            display: flex;
+            align-items: center;
+            text-align: justify;
+            padding: 20px;
+        }
+        .msg-cookies .cookies-btn {
+            margin-left: 30px;
+        }
+        .msg-cookies .cookies-btn button{
+            background-color: black;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 10px 40px;
+            cursor: pointer;
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+        .msg-cookies .cookies-btn button:hover{
+            transform: scale(0.9);
+        }
     </style>
 </head>
 <body>
@@ -47,5 +88,16 @@
             </ul>
         </nav>
     </header>
+    <div class="msg-cookies" id="cookies">
+        <div class="cookies-txt">
+            <p>Caro usuário. Gostariamos de informar que nosso site utiliza cookies para garantir uma experiência de navegação mais eficiente e personalizada. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo quando você visita um site. Eles servem para lembrar suas preferências de navegação, ajudar a otimizar o desempenho do site e fornecer conteúdo relevante para você. Ao continuar navegando, você concorda com a nossa politica de privacidade.</p>
+            
+            <div class="cookies-btn">
+                <button onclick="concordo()">Aceito</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/cookies.js"></script>
 </body>
 </html>
