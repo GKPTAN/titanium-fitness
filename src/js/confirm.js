@@ -25,7 +25,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
 
     try {
         
-        const response = await fetch("http://localhost:3000/verification", {
+        const response = await fetch("https://titanium-fitness.vercel.app/api/verification", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

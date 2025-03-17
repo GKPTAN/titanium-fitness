@@ -8,7 +8,7 @@ import nodemailer from 'nodemailer';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import ipFetch from './src/axios/config.js';
+import ipFetch from '../src/axios/config.js';
 import cookieParser from 'cookie-parser';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -37,7 +37,7 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
-app.use(cors({ origin: ["http://localhost:3000", "http://127.0.0.1:5500"], credentials: true }));
+app.use(cors({ origin: ["http://localhost:3000", "http://127.0.0.1:5500", "https://gkptan.github.io", "https://titanium-fitness.vercel.app/"], credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -307,6 +307,8 @@ async function main(req) {
 
 main().catch(console.error);
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Servidor rodando em http://localhost:${PORT}`);
+// });
+
+export default app;

@@ -11,7 +11,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
     };
 
     try {
-        const response = await fetch("http://localhost:3000/registro", {
+        const response = await fetch("https://titanium-fitness.vercel.app/api/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
