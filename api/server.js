@@ -311,4 +311,4 @@ main().catch(console.error);
 //     console.log(`Servidor rodando em http://localhost:${PORT}`);
 // });
 
-export default app;
+module.exports = app;

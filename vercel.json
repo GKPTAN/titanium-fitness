@@ -8,9 +8,17 @@
       {
         "src": "index.html",
         "use": "@vercel/static"
+      },
+      {
+        "src": "src/pages/*.html",
+        "use": "@vercel/static"
       }
     ],
     "routes": [
-      { "src": "/api/(.*)", "dest": "/api/server.js" }
+      { "src": "/api/(.*)", "dest": "/api/server.js" },
+      { "src": "/registro", "dest": "/src/pages/registro.html"},
+      { "src": "/login", "dest": "/src/pages/login.html"},
+      { "src": "/confirm", "dest": "/src/pages/confirm_email.html"},
+      { "src": "/(.*)", "dest": "/index.html" }
     ]
 }
