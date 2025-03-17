@@ -150,7 +150,7 @@ async function getUserLocation(ip) {
 };
 
 // Rota para receber os dados do formulário
-app.post('/registro', [
+app.post('api/registro', [
     check('names').isString().trim().isLength({ min: 3, max: 255 }),
     check('ages').isInt({ min: 12, max: 100 }),
     check('genres').isIn(["Masculino", "Feminino"]),
@@ -234,7 +234,7 @@ app.post('/registro', [
     };
 });
 
-app.post('/verification', async (req, res) => {
+app.post('api/verification', async (req, res) => {
     const { code, userId } = req.body;
 
     if (!userId) {
