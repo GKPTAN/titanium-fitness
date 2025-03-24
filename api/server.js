@@ -322,17 +322,17 @@ main().catch(console.error);
 //     console.log(`Servidor rodando em http://localhost:${PORT}`);
 // });
 
-// module.exports = app;
+module.exports = app;
 
-try {
-    const key = await fs.readFile(path.join(__dirname, "../certificates/key.pem"));
-    const cert = await fs.readFile(path.join(__dirname, "../certificates/cert.pem"));
+// try {
+//     const key = await fs.readFile(path.join(__dirname, "../certificates/key.pem"));
+//     const cert = await fs.readFile(path.join(__dirname, "../certificates/cert.pem"));
 
-    const options = { key, cert };
+//     const options = { key, cert };
 
-    https.createServer(options, app).listen(PORT, () => {
-        console.log(`Servidor HTTPS rodando na porta ${PORT}`);
-    });
-} catch (error) {
-    console.error("Erro ao criar servidor https: ", error);
-};
+//     https.createServer(options, app).listen(PORT, () => {
+//         console.log(`Servidor HTTPS rodando na porta ${PORT}`);
+//     });
+// } catch (error) {
+//     console.error("Erro ao criar servidor https: ", error);
+// };
