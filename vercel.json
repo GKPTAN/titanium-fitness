@@ -12,6 +12,18 @@
       {
         "src": "src/pages/*.html",
         "use": "@vercel/static"
+      },
+      {
+        "src": "src/style/*.css",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "src/js/*.js",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "src/image/*",
+        "use": "@vercel/static"
       }
     ],
     "routes": [
@@ -19,6 +31,9 @@
       { "src": "/registro", "dest": "/src/pages/registro.html"},
       { "src": "/login", "dest": "/src/pages/login.html"},
       { "src": "/confirm", "dest": "/src/pages/confirm_email.html"},
-      { "src": "/(.*)", "dest": "/index.html" }
+      { "src": "/(.*)", "dest": "/index.html" },
+      { "src": "/style/(.*)", "dest": "/src/style/$1"},
+      { "src": "/js/(.*)", "dest": "/src/js/$1"},
+      { "src": "/image/(.*)", "dest": "/src/image/$1"}
     ]
 }

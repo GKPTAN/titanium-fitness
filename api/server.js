@@ -10,13 +10,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import ipFetch from '../src/axios/config.js';
 import cookieParser from 'cookie-parser';
+import https from 'https';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function getEmailTemplate(name, codeConfirm, location) {
     try {
-        const filePath = path.join(__dirname, 'src/pages/email.html');
+        const filePath = path.join(__dirname, '../src/pages/email.html');
         let emailTemplate = await fs.readFile(filePath, 'utf-8');
 
         emailTemplate = emailTemplate
@@ -32,7 +33,7 @@ async function getEmailTemplate(name, codeConfirm, location) {
     };
 };
 
-dotenv.config();
+dotenv.config({ path: path.resolve('../.env') });
 
 const app = express();
 const PORT = 3000;
@@ -150,7 +151,7 @@ async function getUserLocation(ip) {
 };
 
 // Rota para receber os dados do formulário
-app.post('api/registro', [
+app.post('/api/registro', [
     check('names').isString().trim().isLength({ min: 3, max: 255 }),
     check('ages').isInt({ min: 12, max: 100 }),
     check('genres').isIn(["Masculino", "Feminino"]),
@@ -220,7 +221,7 @@ app.post('api/registro', [
         res.cookie("user_id", userId, {
             httpOnly: true, 
             secure: true,
-            sameSite: "Strict",
+            sameSite: "none",
             maxAge: 12 * 60 * 60 * 1000
         });
 
@@ -234,7 +235,17 @@ app.post('api/registro', [
     };
 });
 
-app.post('api/verification', async (req, res) => {
+app.get('/api/user-id', (req, res) => {
+    const userId = req.cookies.user_id;
+
+    if (!userId) {
+        return res.status(401).json({ error: "Usuário não autenticado" });
+    };
+
+    res.json({ userId });
+});
+
+app.post('/api/verification', async (req, res) => {
     const { code, userId } = req.body;
 
     if (!userId) {
@@ -250,7 +261,7 @@ app.post('api/verification', async (req, res) => {
 
         await db.execute("UPDATE unverified_users SET verificado = 1 WHERE id = ?", [userId]);
 
-        await db.execute("INSERT INTO users (name, age, gender, email, password, verificado, date, hours, ip, city, region, country, location) SELECT name, age, gender, email, password, date, hours, ip, city, region, country, location, NOW() FROM unverified_users WHERE id = ?", [userId]);
+        await db.execute("INSERT INTO users (name, age, gender, email, password, verificado, date, hours, ip, city, region, country, location) SELECT name, age, gender, email, password, 1, date, hours, ip, city, region, country, location FROM unverified_users WHERE id = ?", [userId]);
 
         await db.execute("DELETE FROM unverified_users WHERE id = ?", [userId]);
 
@@ -311,4 +322,17 @@ main().catch(console.error);
 //     console.log(`Servidor rodando em http://localhost:${PORT}`);
 // });
 
-module.exports = app;
+// module.exports = app;
+
+try {
+    const key = await fs.readFile(path.join(__dirname, "../certificates/key.pem"));
+    const cert = await fs.readFile(path.join(__dirname, "../certificates/cert.pem"));
+
+    const options = { key, cert };
+
+    https.createServer(options, app).listen(PORT, () => {
+        console.log(`Servidor HTTPS rodando na porta ${PORT}`);
+    });
+} catch (error) {
+    console.error("Erro ao criar servidor https: ", error);
+};

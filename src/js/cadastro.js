@@ -11,7 +11,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
     };
 
     try {
-        const response = await fetch("https://titanium-fitness.vercel.app/api/registro", {
+        const response = await fetch("https://localhost:3000/api/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -24,9 +24,9 @@ document.querySelector("form").addEventListener("submit", async function(event) 
             
             alert(result.message);
                 
-            // if (result.redirectUrl) {
-            //     window.location.href = result.redirectUrl;
-            // };
+            if (result.redirectUrl) {
+                window.location.href = result.redirectUrl;
+            };
         } else {
             console.error("Erro na validação:", result.error);
             alert(result.message || "Erro ao cadastrar. Verifique os dados e tente novamente.");

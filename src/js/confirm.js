@@ -1,21 +1,27 @@
-function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    
-    for (let i = 0; i < cookies.length; i++) {
-    
-        const cookie = cookies[i].split("=");
-    
-        if (cookie[0] === name) {
-            return decodeURIComponent(cookie[1]);
-        }
-    }   
-    return null;
-} 
+async function getUserId() {
+    try {
+        const response = await fetch("https://localhost:3000/api/user-id", {
+            method: "GET",
+            credentials: "include"
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar o ID do usuário");
+        };
+
+        const data = await response.json();
+        return data.userId;
+    } catch (error) {
+        console.error("Erro ao buscar o ID do usuário:", error);
+        return null;
+    };
+};
 
 document.querySelector("form").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const userId = getCookie("user_id");
+    const userId = await getUserId();
+    console.log("user_id: ", userId);
     const code = document.getElementById("codigo").value;
 
     const formData = {
@@ -25,7 +31,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
 
     try {
         
-        const response = await fetch("https://titanium-fitness.vercel.app/api/verification", {
+        const response = await fetch("https://localhost:3000/api/verification", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
