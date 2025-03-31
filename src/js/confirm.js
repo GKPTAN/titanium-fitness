@@ -57,3 +57,4 @@ document.querySelector("form").addEventListener("submit", async function(event) 
         alert("Erro de verificação. Tente novamente ou contate o suporte.");
     };
 });
+// grar

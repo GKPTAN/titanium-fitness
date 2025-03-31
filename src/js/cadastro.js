@@ -9,6 +9,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
         password_user: document.getElementById("password").value,
         password_conf: document.getElementById("confirm_password").value
     };
+    
 
     try {
         const response = await fetch("https://titanium-fitness.vercel.app/api/registro", {
