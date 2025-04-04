@@ -310,14 +310,14 @@ app.post("/api/login", async (req, res) => {
   try {
     const results = await sql`SELECT * FROM users WHERE email = ${email_user}`;
     if (results?.length > 0) {
-      const {name, email, password, city} = results[0];
+      const {name, email, password, city, two_steps_authentication} = results[0];
       const passwordMatch = await bcrypt.compare(password_user, password);
 
       if (!passwordMatch) {
         return res.status(401).json({ message: "E-mail ou senha incorretos." });
       };
 
-      if (twoStepsAuthentication === "enabled") {
+      if (two_steps_authentication === "enabled") {
         // código para aplicativo de autenticação
       };
 
@@ -338,7 +338,7 @@ app.post("/api/login", async (req, res) => {
         console.log("email enviado:", info.messageId);
       }
 
-      res.status(200).json({ message: "Login realizado com sucesso!" });
+      res.status(200).json({ redirectUrl: "/src/pages/home.html" });
     } else {
       res.status(404).json({ message: "Usuário não encontrado" });
     }

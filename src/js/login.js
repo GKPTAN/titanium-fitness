@@ -18,7 +18,7 @@ document.querySelector("form").addEventListener("submit", async function (event)
     };
 
     try {
-        const response = await fetch("https://localhost:3000/api/login", {
+        const response = await fetch("https://titanium-fitness.vercel.app/api/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
