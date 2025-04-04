@@ -336,6 +336,7 @@ app.post("/api/login", async (req, res) => {
         });
 
         console.log("email enviado:", info.messageId);
+        res.status(403).json({ message: "acesso negado!"});
       }
 
       res.status(200).json({ redirectUrl: "/src/pages/home.html" });
