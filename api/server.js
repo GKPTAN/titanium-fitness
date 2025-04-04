@@ -43,16 +43,24 @@ const __dirname = path.dirname(__filename);
 
 async function getEmailTemplate(name, codeConfirm, location) {
   try {
-    const filePath = path.join(__dirname, "../src/pages/email.html");
-    let emailTemplate = await fs.readFile(filePath, "utf-8");
+    const emailVerify = path.join(__dirname, "../src/templates/email.html");
+    const emailAcessVerify = path.join(__dirname, "../src/templates/email_acess.html");
 
-    emailTemplate = emailTemplate
+    let emailVerifyTemplate = await fs.readFile(emailVerify, "utf-8");
+    let emailAcessVerifyTemplate = await fs.readFile(emailAcessVerify, "utf-8");
+
+    emailVerifyTemplate = emailVerifyTemplate
       .replace("{{name}}", name)
       .replace("{{codeConfirm}}", codeConfirm)
       .replace("{{city}}", location.city)
       .replace("{{region}}", location.region);
 
-    return emailTemplate;
+    emailAcessVerifyTemplate = emailAcessVerifyTemplate
+      .replace("{{name}}", name)
+      .replace("{{city}}", location.city)
+      .replace("{{region}}", location.region)
+
+    return { emailVerifyTemplate, emailAcessVerifyTemplate };
   } catch (error) {
     console.error("Erro ao carregar o template de e-mail: ", error);
     return "";
@@ -236,7 +244,7 @@ app.post("/api/registro", async (req, res) => {
 
     res.status(200).json({
       message: "Cadastro realizado com sucesso.",
-      redirectUrl: "/src/pages/confirm_email.html",
+      redirectUrl: "/titanium-fitness/src/pages/confirm_email.html",
     });
   } catch (error) {
     console.error("Erro ao registrar usuário: ", error);
@@ -278,7 +286,7 @@ app.post("/api/verification", async (req, res) => {
 
     res.status(200).json({
       message: "E-mail verificado com sucesso!",
-      redirectUrl: "/src/pages/login.html",
+      redirectUrl: "/titanium-fitness/src/pages/login.html",
     });
   } catch (error) {
     console.error("Erro ao verificar código:", error);
@@ -286,8 +294,62 @@ app.post("/api/verification", async (req, res) => {
   }
 });
 
+app.post("/api/login", async (req, res) => {
+  const { email_user, password_user } = req.body;
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  try {
+    const results = await sql`SELECT * FROM unverified_users WHERE email = ${email_user}`;
+    if (results?.length > 0) {
+      res.status(200).json({ redirectUrl: "/src/pages/confirm_email.html" });
+    }
+  } catch (error) {
+    console.error("falha ao encontrar dados");
+  };
+
+  try {
+    const results = await sql`SELECT * FROM users WHERE email = ${email_user}`;
+    if (results?.length > 0) {
+      const {name, email, password, city} = results[0];
+      const passwordMatch = await bcrypt.compare(password_user, password);
+
+      if (!passwordMatch) {
+        return res.status(401).json({ message: "E-mail ou senha incorretos." });
+      };
+
+      if (twoStepsAuthentication === "enabled") {
+        // código para aplicativo de autenticação
+      };
+
+      const locationOrigin = await getUserLocation(ip);
+
+      if(locationOrigin.city !== city) {
+        const { emailAcessVerifyTemplate } = await getEmailTemplate(name, null, locationOrigin);
+        const confirmLink = `https://gkptan.github.io/titanium-fitness/src/pages/confirm_acess.html?city=${encodeURIComponent(locationOrigin.city)}&region=${encodeURIComponent(locationOrigin.region)}`;
+
+        const info = await transporter.sendMail({
+          from: `"Academia Titanium Fitness" <${process.env.USER_MAIL}>`,
+          to: email,
+          subject: "Confirmação de acesso a sua conta",
+          text: `Olá ${name}, recentemente sua conta foi logada na cidade: ${locationOrigin.city}, estado: ${locationOrigin.region}. Se não foi você, verifique sua conta clicando no link <a href="gkptan.github.io/titanium-fitness/src/pages/confirm_acess.html">verificar acesso</a>, atenciosamente, equipe Titanium Fitness`,
+          html: emailAcessVerifyTemplate.replace("{{confirm_link}}", confirmLink)
+        });
+
+        console.log("email enviado:", info.messageId);
+      }
+
+      res.status(200).json({ message: "Login realizado com sucesso!" });
+    } else {
+      res.status(404).json({ message: "Usuário não encontrado" });
+    }
+  } catch (error) {
+    console.log("Erro ao fazer login no site:", error);
+    res.status(500).json({ message: "Erro interno no servidor, tente novamente mais tarde" });
+  };
+});
+
 async function main(emails, names, location) {
-  const emailTemplate = await getEmailTemplate(names, codeConfirm, location);
+  const { emailVerifyTemplate } = await getEmailTemplate(names, codeConfirm, location);
 
   try {
     const info = await transporter.sendMail({
@@ -304,7 +366,7 @@ async function main(emails, names, location) {
           - Não compartilhe este código. 
           - Nunca pediremos códigos por e-mail ou telefone.
           - Se você não solicitou este registro, ignore esta mensagem.`,
-      html: emailTemplate,
+      html: emailVerifyTemplate,
     });
   
     console.log("e-mail enviado para: ", emails);
@@ -321,16 +383,16 @@ async function main(emails, names, location) {
 
 export default app;
 
-// try {
-//     const key = await fs.readFile(path.join(__dirname, "../certificates/key.pem"));
-//     const cert = await fs.readFile(path.join(__dirname, "../certificates/cert.pem"));
-//     // const certSupabase = await fs.readFile(path.join(__dirname, "../certificates/prod-ca-2021.crt"));
+try {
+    const key = await fs.readFile(path.join(__dirname, "../certificates/key.pem"));
+    const cert = await fs.readFile(path.join(__dirname, "../certificates/cert.pem"));
+    // const certSupabase = await fs.readFile(path.join(__dirname, "../certificates/prod-ca-2021.crt"));
 
-//     const options = { key, cert };
+    const options = { key, cert };
 
-//     https.createServer(options, app).listen(PORT, () => {
-//         console.log(`Servidor HTTPS rodando na porta ${PORT}`);
-//     });
-// } catch (error) {
-//     console.error("Erro ao criar servidor https: ", error);
-// };
+    https.createServer(options, app).listen(PORT, () => {
+        console.log(`Servidor HTTPS rodando na porta ${PORT}`);
+    });
+} catch (error) {
+    console.error("Erro ao criar servidor https: ", error);
+};

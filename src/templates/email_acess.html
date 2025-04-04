@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-mail de Verificação</title>
+  </head>
+  <body
+    style="
+      background-color: #000;
+      color: white;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    "
+  >
+    <main
+      style="
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin: auto;
+      "
+    >
+      <div style="display: flex;width: 100%;justify-content: center;">
+          <img
+            src="https://gkptan.github.io/titanium-fitness/src/image/logo.png"
+            alt="logo da academia"
+            style="max-width: 300px"
+          />
+      </div>
+      <p style="width: 100%; font-size: 16px; margin: 0; text-align: center;">
+        olá {{name}}.
+      </p>
+      <p style="width: 100%; font-size: 16px; text-align: center;">
+        recentemente sua conta foi logada na cidade: <strong style="margin-left: 7px;">{{city}}</strong>, estado: <strong style="margin-left: 7px;">{{region}}</strong>. Se não foi você, verifique sua conta clicando no link abaixo:atenciosamente, equipe Titanium Fitness`
+      </p>
+      <p style="width: 100%; font-size: 14px; color: #ccc; text-align: center; margin: 20px 0px;">
+        <a style="background-color: white; padding: 10px;border-radius: 15px;text-decoration: none;transition: all 0.3s ease-in-out;color: black;" onmouseover="this.style.backgroundColor='#1ac9d9'" onmouseleave="this.style.backgroundColor='white'" href="{{confirm_link}}">Verificar Acesso</a>
+      </p>
+      <p style="width: 100%; font-size: 14px; color: #ccc; margin-bottom: 20px; text-align: center;">
+        Atenciosamente, Equipe Titanium Fitness.
+      </p>
+    </main>
+  </body>
+</html>

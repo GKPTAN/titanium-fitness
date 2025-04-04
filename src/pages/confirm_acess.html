@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Voces&display=swap" rel="stylesheet">
+    <script src="../js/confirm_acess.js"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            position: relative;
+            background-color: #e6e8f1;
+            font-family: "Urbanist", serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .verify-acess {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: #e6e8f1;
+            box-shadow:  41px 41px 82px #c0c1c7, -41px -41px 82px #f6f8ff;
+            border: 1px solid #c0c1c738;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 1.5s ease-in-out;
+        }
+        .verify-acess h2 {
+            font-family: "Voces", serif;
+            text-transform: uppercase;
+            color: #e83d64;
+        }
+        .verify-acess button {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-family: "Urbanist", serif;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+        }
+        .verify-acess .confirmed {
+            color: #16c72e;
+        }
+        .verify-acess .confirmed:hover{
+            background-color: #16c72e;
+            color: white;
+        }
+        .verify-acess .not-confirmed {
+            color: #e83d64;
+        }
+        .verify-acess .not-confirmed:hover {
+            background-color: #e83d64;
+            color: white;
+        }
+        .confirmado {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            top: 50%;
+            left: 150%;
+            transform: translate(-50%,-50%);
+            width: 50%;
+            background-color: #e6e8f1;
+            box-shadow:  41px 41px 82px #c0c1c7, -41px -41px 82px #f6f8ff;
+            border: 1px solid #c0c1c738;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="verify-acess">
+        <h2>Verificação de acesso!</h2>
+        <p>A sua conta foi acessada em {{city}}, {{region}}.</p>
+        <button id="confirmed" class="confirmed">Sim, fui eu</button>
+        <button id="not_confirmed" class="not-confirmed">Não fui eu</button>
+    </div>
+    <div class="confirmado">
+        <p>Agradecemos pela sua colaboração, ative a verificação de duas etapas se ainda não ativou 💪😎</p>
+    </div>
+</body>
+</html>
