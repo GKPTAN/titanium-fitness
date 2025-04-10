@@ -1,83 +1,194 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Voces&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Voces&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        position: relative;
+        background-color: #e6e8f1;
+        font-family: "Urbanist", serif;
+        width: 100vw;
+        height: 100vh;
+      }
+      h1 {
+        text-align: center;
+        font-family: "Voces", serif;
+        background-color: black;
+        color: white;
+        padding: 30px 0px;
+        margin-bottom: 30px;
+      }
+      p {
+        text-align: center;
+        font-size: 18px;
+      }
+      .confirm-email {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50px;
+        background: #e6e8f1;
+        box-shadow: 41px 41px 82px #c0c1c7, -41px -41px 82px #f6f8ff;
+        border: 1px solid #c0c1c738;
+        padding: 2rem;
+        border-radius: 30px;
+      }
+      .confirm-email form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+      .confirm-email form label {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .confirm-email form input {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px 5px;
+        border-radius: 10px;
+        font-size: 18px;
+        border: none;
+      }
+      .confirm-email form button {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 5px;
+        border-radius: 10px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        background-color: #ffffff;
+        transition: all 0.3s ease-in-out;
+      }
+      .confirm-email form button:hover {
+        background-color: #97f7ba;
+      }
+      .sk-chase {
+        display: none;
+        width: 21px;
+        height: 21px;
+        position: relative;
+        animation: sk-chase 2.5s infinite linear both;
+      }
+
+      .sk-chase-dot {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        animation: sk-chase-dot 2s infinite ease-in-out both;
+      }
+
+      .sk-chase-dot:before {
+        content: "";
+        display: block;
+        width: 25%;
+        height: 25%;
+        background-color: #000;
+        border-radius: 100%;
+        animation: sk-chase-dot-before 2s infinite ease-in-out both;
+      }
+
+      .sk-chase-dot:nth-child(1) {
+        animation-delay: -1.1s;
+      }
+      .sk-chase-dot:nth-child(2) {
+        animation-delay: -1s;
+      }
+      .sk-chase-dot:nth-child(3) {
+        animation-delay: -0.9s;
+      }
+      .sk-chase-dot:nth-child(4) {
+        animation-delay: -0.8s;
+      }
+      .sk-chase-dot:nth-child(5) {
+        animation-delay: -0.7s;
+      }
+      .sk-chase-dot:nth-child(6) {
+        animation-delay: -0.6s;
+      }
+      .sk-chase-dot:nth-child(1):before {
+        animation-delay: -1.1s;
+      }
+      .sk-chase-dot:nth-child(2):before {
+        animation-delay: -1s;
+      }
+      .sk-chase-dot:nth-child(3):before {
+        animation-delay: -0.9s;
+      }
+      .sk-chase-dot:nth-child(4):before {
+        animation-delay: -0.8s;
+      }
+      .sk-chase-dot:nth-child(5):before {
+        animation-delay: -0.7s;
+      }
+      .sk-chase-dot:nth-child(6):before {
+        animation-delay: -0.6s;
+      }
+
+      @keyframes sk-chase {
+        100% {
+          transform: rotate(360deg);
         }
-        body{
-            position: relative;
-            background-color: #e6e8f1;
-            font-family: "Urbanist", serif;
-            width: 100vw;
-            height: 100vh;
+      }
+
+      @keyframes sk-chase-dot {
+        80%,
+        100% {
+          transform: rotate(360deg);
         }
-        h1 {
-            text-align: center;
-            font-family: "Voces", serif;
-            background-color: black;
-            color: white;
-            padding: 30px 0px;
-            margin-bottom: 30px;
+      }
+
+      @keyframes sk-chase-dot-before {
+        50% {
+          transform: scale(0.4);
         }
-        p {
-            text-align: center;
-            font-size: 18px;
+        100%,
+        0% {
+          transform: scale(1);
         }
-        .confirm-email {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50px;
-            background: #e6e8f1;
-            box-shadow:  41px 41px 82px #c0c1c7, -41px -41px 82px #f6f8ff;
-            border: 1px solid #c0c1c738;
-            padding: 2rem;
-            border-radius: 30px;
-        }
-        .confirm-email form {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        .confirm-email form input {
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px 5px; 
-            border-radius: 10px;
-            font-size: 18px;
-            border: none;
-        }
-        .confirm-email form input[type="submit"] {
-            cursor: pointer;
-            background-color: #ffffff;
-            transition: all 0.3s ease-in-out;
-        }
-        .confirm-email form input[type="submit"]:hover{
-            background-color: #97f7ba;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Verificação de e-mail</h1>
     <p>Um código de verificação foi enviado para seu e-mail, digite o código abaixo.</p>
     <div class="confirm-email">
-        <form>
-            <label for="codigo">Código de Confirmação</label>
-            <input type="text" name="codigo" id="codigo" required>
-            <input type="submit" value="Verificar">
-        </form>
+      <form>
+        <label for="codigo">Código de Confirmação</label>
+        <input type="text" name="codigo" id="codigo" required />
+        <button type="submit">
+          <span>Verificar</span>
+          <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+          </div>
+        </button>
+      </form>
     </div>
 
     <script src="../js/confirm.js"></script>
-</body>
+  </body>
 </html>

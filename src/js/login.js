@@ -12,13 +12,18 @@ olho.addEventListener('click', () => {
 document.querySelector("form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
+    const loading = document.querySelector(".sk-chase");
+    const span = document.querySelector("button span");
+    loading.style.display = "block";
+    span.style.display = 'none';
+
     const formData = {
         email_user: document.getElementById("email_user").value,
         password_user: document.getElementById("pass_user").value
     };
 
     try {
-        const response = await fetch("https://titanium-fitness.vercel.app/api/login", {
+        const response = await fetch("https://titanium-fitness.vercel.app/api/auth/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -36,9 +41,13 @@ document.querySelector("form").addEventListener("submit", async function (event)
         } else {
             console.error("e-mail ou senha errados!");
             alert(result.message || "e-mail ou senha errados! Verifique os dados e tente novamente");
+            loading.style.display = "none";
+            span.style.display = 'block';
         }
     } catch (error) {
         console.error("Erro ao enviar dados!", error);
         alert("Erro ao fazer login, tente novamente mais tarde ou contate o suporte.");
+        loading.style.display = "none";
+        span.style.display = 'block';
     };
 });
