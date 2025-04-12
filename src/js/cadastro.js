@@ -6,17 +6,17 @@ function hideLoading(loading, span) {
     span.style.display = 'block';
 };
 
-function showAndHideSpan(aviso) {
-    if (aviso.classList.contains("sucess")) {
-        aviso.classList.remove("sucess");
+function showAndHideSpan(aviso, span) {
+    if (span.classList.contains("sucess")) {
+        span.classList.remove("sucess");
     } else {
-        aviso.classList.remove("error");
+        span.classList.remove("error");
     };
-    aviso.classList.add("error");
+    span.classList.add("error");
     aviso.style.opacity = "1";
     setTimeout(() => {
         aviso.style.opacity = "0";
-        aviso.innerHTML = "";
+        span.innerHTML = "";
     }, 6000);
 };
 
@@ -29,7 +29,8 @@ document.querySelector("form").addEventListener("submit", async function(event) 
 
     const loading = document.querySelector(".sk-chase");
     const span = document.querySelector("button span");
-    const aviso = document.querySelector("div.aviso span");
+    const aviso = document.querySelector("div.aviso");
+    const span_aviso = document.querySelector("div.aviso span");
     loading.style.display = "block";
     span.style.display = 'none';
 
@@ -43,7 +44,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
     };
     
     try {
-        const response = await fetch("https://titanium-fitness.vercel.app/api/auth/registro", {
+        const response = await fetch("https://titanium-fitness.vercel.app/api/auth/registr", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -54,11 +55,11 @@ document.querySelector("form").addEventListener("submit", async function(event) 
 
         if (response.ok) {
             
-            if (aviso.classList.contains("error")) {
-                aviso.classList.remove("error");
+            if (span_aviso.classList.contains("error")) {
+                span_aviso.classList.remove("error");
             };
-            aviso.classList.add("sucess");
-            aviso.innerHTML = result.message;
+            span_aviso.classList.add("sucess");
+            span_aviso.innerHTML = result.message;
             aviso.style.opacity = "1";
             
             if (result.redirectUrl) {
@@ -73,14 +74,14 @@ document.querySelector("form").addEventListener("submit", async function(event) 
                 return;
             };
 
-            aviso.innerHTML = result.message || "Erro ao cadastrar. Verifique os dados e tente novamente."
-            showAndHideSpan(aviso);
+            span_aviso.innerHTML = result.message || "Erro ao cadastrar. Verifique os dados e tente novamente."
+            showAndHideSpan(aviso, span_aviso);
             hideLoading(loading, span);
         };
     } catch (error) {
         console.error("Erro ao enviar os dados:", error);
-        aviso.innerHTML = "Erro ao se registrar. Tente novamente ou contate o suporte.";
-        showAndHideSpan(aviso);
+        span_aviso.innerHTML = "Erro ao se registrar. Tente novamente ou contate o suporte.";
+        showAndHideSpan(aviso, span_aviso);
         hideLoading(loading, span);
     };
 });

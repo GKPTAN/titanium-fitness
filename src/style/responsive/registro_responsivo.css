@@ -1,0 +1,17 @@
+@media (max-height: 890px) {
+    div.aviso {
+        top: 50%;
+    }
+    div.aviso .sucess, div.aviso .error {
+        background-color: rgba(0, 0, 0, 0.24);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 15px;
+    }
+    .sucess {
+        color: #347d9e;
+    }
+    .error {
+        color: red;
+    }
+}
