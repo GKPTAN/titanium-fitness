@@ -82,7 +82,7 @@ input {
 }
 
 .register a {
-  color: red;
+  color: #E00000;
   font-weight: bold;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
@@ -218,7 +218,7 @@ div.aviso .error {
 .error {
   color: #E00000;
   font-weight: 500;
-  opacity: 1;
+  opacity: 0;
   transition: all 0.2s ease-in-out;
 }
 .error-span {
