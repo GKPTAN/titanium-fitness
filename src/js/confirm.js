@@ -6,7 +6,12 @@ function hideLoading(loading, span) {
 };
 
 function showAndHideSpan(aviso) {
-  aviso.classList.toggle("error");
+  if (aviso.classList.contains("sucess")) {
+    aviso.classList.remove("sucess");
+  } else {
+    aviso.classList.remove("error");
+  };
+  aviso.classList.add("error");
   aviso.style.opacity = "1";
   setTimeout(() => {
       aviso.style.opacity = "0";
@@ -67,9 +72,10 @@ document.querySelector("form").addEventListener("submit", async function (event)
         aviso.innerHTML = result.message;
 
         if (aviso.classList.contains("error")) {
-          aviso.classList.toggle("sucess");
+          aviso.classList.remove("error");
         };
 
+        aviso.classList.add("sucess");
         aviso.style.opacity = "1";
 
         if (result.redirectUrl) {

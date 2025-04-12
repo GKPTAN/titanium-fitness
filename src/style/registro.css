@@ -4,7 +4,8 @@ body {
   background-color: #e6e8f1;
   font-family: "Urbanist", serif;
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
+  overflow-x: hidden;
 }
 .sign_up {
   position: absolute;
@@ -205,6 +206,7 @@ div.aviso {
 div.aviso .sucess, div.aviso .error {
   margin-top: 20px;
   font-size: 1.5rem;
+  text-align: center;
 }
 .sucess {
   color: #26a537;
