@@ -1,3 +1,19 @@
+const aviso = document.querySelector("div.aviso span");
+
+function hideLoading(loading, span) {
+  loading.style.display = "none";
+  span.style.display = 'block';
+};
+
+function showAndHideSpan(aviso) {
+  aviso.classList.toggle("error");
+  aviso.style.opacity = "1";
+  setTimeout(() => {
+      aviso.style.opacity = "0";
+      aviso.innerHTML = "";
+  }, 6000);
+};
+
 async function getUserId() {
   try {
     const response = await fetch("https://titanium-fitness.vercel.app/api/auth/user_id", {
@@ -48,21 +64,27 @@ document.querySelector("form").addEventListener("submit", async function (event)
       const result = await response.json();
 
       if (response.ok) {
-        alert(result.message);
+        aviso.innerHTML = result.message;
+
+        if (aviso.classList.contains("error")) {
+          aviso.classList.toggle("sucess");
+        };
+
+        aviso.style.opacity = "1";
 
         if (result.redirectUrl) {
           window.location.href = result.redirectUrl;
         }
       } else {
         console.error("Erro na validação:", result.error);
-        alert(result.message || "Erro ao verificar. insira o código correto e tente novamente.");
-        loading.style.display = "none";
-        span.style.display = 'block';
+        aviso.innerHTML = result.message || "Erro ao verificar. insira o código correto e tente novamente.";
+        showAndHideSpan(aviso);
+        hideLoading(loading, span);
       };
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
-      alert("Erro de verificação. Tente novamente ou contate o suporte.");
-      loading.style.display = "none";
-      span.style.display = 'block';
+      aviso.innerHTML = "Erro de verificação. Tente novamente ou contate o suporte.";
+      showAndHideSpan(aviso);
+      hideLoading(loading, span);
     };
   });

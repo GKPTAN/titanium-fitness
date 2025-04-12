@@ -47,7 +47,6 @@ export const loginController = async (req, res) => {
             html: emailAcessVerifyTemplate.replace("{{confirm_link}}", confirmLink)
           });
   
-          console.log("email enviado:", info.messageId);
           res.status(403).json({ message: "acesso negado!"});
         };
       }
@@ -159,7 +158,7 @@ export const getUserIdController = async (req, res) => {
   console.log("Id do usuário:", userId);
 
   if (!userId || userId === null) {
-    return res.status(401).json({ error: "Usuário não autenticado.", message: "Erro no servidor." });
+    return res.status(401).json({ error: "Tempo de solicitação expirado.", message: "Erro no servidor." });
   };
 
   res.status(200).json({ userId });
@@ -177,7 +176,7 @@ export const verificationController = async (req, res) => {
 
     if (user?.length > 0) {
       if (code !== user[0].confirm_code) {
-        return res.status(400).json({ message: "Código inválido ou expirado." });
+        return res.status(400).json({ message: "Código inválido ou expirado!" });
       };
 
       await updateUnverifiedUser(userId);
@@ -189,11 +188,11 @@ export const verificationController = async (req, res) => {
       res.clearCookie("user_id");
 
       res.status(200).json({
-        message: "E-mail verificado com sucesso!",
+        message: "E-mail verificado com sucesso",
         redirectUrl: "titanium-fitness/src/pages/login.html",
       });
     } else {
-      return res.status(404).json({ message: "Usuário não encontrado." });
+      return res.status(404).json({ message: "Tempo de solicitação expirado!" });
     };
   } catch (error) {
     console.error("Erro ao verificar código:", error);

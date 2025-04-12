@@ -9,11 +9,26 @@ olho.addEventListener('click', () => {
     };
 });
 
+function hideLoading(loading, span) {
+    loading.style.display = "none";
+    span.style.display = 'block';
+};
+
+function showAndHideSpan(aviso) {
+    aviso.style.opacity = "1";
+    setTimeout(() => {
+        aviso.style.opacity = "0";
+        aviso.innerHTML = "";
+    }, 6000);
+};
+
 document.querySelector("form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const loading = document.querySelector(".sk-chase");
     const span = document.querySelector("button span");
+    const spanErrors = document.querySelectorAll(".error-span");
+    const avisoError = document.querySelector(".error");
     loading.style.display = "block";
     span.style.display = 'none';
 
@@ -40,14 +55,21 @@ document.querySelector("form").addEventListener("submit", async function (event)
             };
         } else {
             console.error("e-mail ou senha errados!");
-            alert(result.message || "e-mail ou senha errados! Verifique os dados e tente novamente");
-            loading.style.display = "none";
-            span.style.display = 'block';
-        }
+            if (result.message === "E-mail ou senha incorretos.") {
+                spanErrors.forEach((spanError) => {
+                    spanError.style.opacity = "1";
+                });
+                hideLoading(loading, span);
+                return;
+            };
+            avisoError.innerHTML = result.message || "e-mail ou senha errados! Verifique os dados e tente novamente";
+            showAndHideSpan(avisoError);
+            hideLoading(loading, span);
+        };
     } catch (error) {
         console.error("Erro ao enviar dados!", error);
-        alert("Erro ao fazer login, tente novamente mais tarde ou contate o suporte.");
-        loading.style.display = "none";
-        span.style.display = 'block';
+        avisoError.innerHTML = "Erro ao fazer login, tente novamente mais tarde ou contate o suporte.";
+        showAndHideSpan(avisoError);
+        hideLoading(loading, span);
     };
 });

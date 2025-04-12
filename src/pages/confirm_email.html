@@ -166,11 +166,33 @@
           transform: scale(1);
         }
       }
+      div.aviso {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+      div.aviso .sucess,
+      div.aviso .error {
+        font-size: 1.5rem;
+      }
+      .sucess {
+        color: #26a537;
+        font-weight: 500;
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+      }
+      .error {
+        color: red;
+        font-weight: 500;
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+      }
     </style>
   </head>
   <body>
     <h1>Verificação de e-mail</h1>
     <p>Um código de verificação foi enviado para seu e-mail, digite o código abaixo.</p>
+    <div class="aviso"><span class="sucess"></span></div>
     <div class="confirm-email">
       <form>
         <label for="codigo">Código de Confirmação</label>

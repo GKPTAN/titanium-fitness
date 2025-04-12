@@ -10,11 +10,14 @@
     <title>Login - Titanium Fitness</title>
 </head>
 <body>
+    <div class="aviso"><span class="error"></span></div>
     <div class="container">
         <h1>Login</h1>
         <form class="login-form">
             <input type="email" name="email" id="email_user" placeholder="E-mail" required>
+            <span class="error-span">E-mail ou senha incorretos!</span>
             <input type="password" name="password" id="pass_user" placeholder="Senha" required>
+            <span class="error-span">E-mail ou senha incorretos!</span>
             <div class="reveal">
                 <img id="revelar" src="../image/esconder.svg" alt="esconder ou revelar senha">
             </div>
@@ -39,7 +42,7 @@
         <p class="slogan">Transforme seu corpo e sua mente com treinos exclusivos e personalizados para você!</p>
       
         <div class="small-logo">
-            <img src="../image/Logo.png" alt="Logo">
+            <img src="../image/Logo.png" alt="Logo da academia">
         </div>
     </div>
 

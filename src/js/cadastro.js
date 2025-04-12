@@ -1,8 +1,30 @@
+const inputEmail = document.getElementById("email");
+const spanError = document.querySelector("span.error-span");
+
+function hideLoading(loading, span) {
+    loading.style.display = "none";
+    span.style.display = 'block';
+};
+
+function showAndHideSpan(aviso) {
+    aviso.classList.toggle("error");
+    aviso.style.opacity = "1";
+    setTimeout(() => {
+        aviso.style.opacity = "0";
+        aviso.innerHTML = "";
+    }, 6000);
+};
+
+inputEmail.addEventListener("focus", () =>{
+    spanError.style.opacity = "0";
+});
+
 document.querySelector("form").addEventListener("submit", async function(event) {
     event.preventDefault(); // Evita recarregar a página
 
     const loading = document.querySelector(".sk-chase");
     const span = document.querySelector("button span");
+    const aviso = document.querySelector("div.aviso span");
     loading.style.display = "block";
     span.style.display = 'none';
 
@@ -27,22 +49,33 @@ document.querySelector("form").addEventListener("submit", async function(event) 
 
         if (response.ok) {
             
-            alert(result.message);
-                
+            if (aviso.classList.contains("error")) {
+                aviso.classList.toggle("sucess");
+            };
+            aviso.innerHTML = result.message;
+            aviso.style.opacity = "1";
+            
             if (result.redirectUrl) {
                 window.location.href = result.redirectUrl;
             };
         } else {
             console.error("Erro na validação:", result.error);
-            alert(result.message || "Erro ao cadastrar. Verifique os dados e tente novamente.");
-            loading.style.display = "none";
-            span.style.display = 'block';
+
+            if (result.message === "Este e-mail já está cadastrado!") {
+                spanError.style.opacity = "1";
+                hideLoading(loading, span);
+                return;
+            };
+
+            aviso.innerHTML = result.message || "Erro ao cadastrar. Verifique os dados e tente novamente."
+            showAndHideSpan(aviso);
+            hideLoading(loading, span);
         };
     } catch (error) {
         console.error("Erro ao enviar os dados:", error);
-        alert("Erro ao se registrar. Tente novamente ou contate o suporte.");
-        loading.style.display = "none";
-        span.style.display = 'block';
+        aviso.innerHTML = "Erro ao se registrar. Tente novamente ou contate o suporte.";
+        showAndHideSpan(aviso);
+        hideLoading(loading, span);
     };
 });
 

@@ -64,6 +64,9 @@ input[type="radio"]:checked#masc {
 input[type="radio"]:checked#fem {
   background-color: #ff33dc;
 }
+.sign_up form .email {
+  position: relative;
+}
 .sign_up form .password input {
   margin-bottom: 10px;
 }
@@ -169,19 +172,16 @@ input[type="radio"]:checked#fem {
 .sk-chase-dot:nth-child(6):before {
   animation-delay: -0.6s;
 }
-
 @keyframes sk-chase {
   100% {
     transform: rotate(360deg);
   }
 }
-
 @keyframes sk-chase-dot {
   80%, 100% {
     transform: rotate(360deg);
   }
 }
-
 @keyframes sk-chase-dot-before {
   50% {
     transform: scale(0.4);
@@ -189,4 +189,32 @@ input[type="radio"]:checked#fem {
   100%, 0% {
     transform: scale(1);
   }
+}
+.error-span {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: red;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;;
+}
+div.aviso {
+  display: flex;
+  justify-content: center;
+}
+div.aviso .sucess, div.aviso .error {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+.sucess {
+  color: #26a537;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.error {
+  color: red;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
 }

@@ -12,6 +12,7 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="aviso"><span class="sucess"></span></div>
     <div class="sign_up">
         <h1>Registra-se</h1>
         <form onsubmit="return validarForm()">
@@ -33,6 +34,7 @@
             <div class="email">
                 <label for="email">E-mail: </label>
                 <input type="email" name="emails" id="email" placeholder="Digite o seu e-mail..." maxlength="255" autocomplete="email" required>
+                <span class="error-span">*Este e-mail já está cadastrado!</span>
             </div>
             <div class="password">
                 <label for="password">senha: </label>
