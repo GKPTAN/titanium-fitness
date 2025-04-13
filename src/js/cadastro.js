@@ -13,9 +13,11 @@ function showAndHideSpan(aviso, span) {
         span.classList.remove("error");
     };
     span.classList.add("error");
+    aviso.style.display = "flex";
     aviso.style.opacity = "1";
     setTimeout(() => {
         aviso.style.opacity = "0";
+        aviso.style.display = "none";
         span.innerHTML = "";
     }, 6000);
 };
@@ -60,6 +62,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
             };
             span_aviso.classList.add("sucess");
             span_aviso.innerHTML = result.message;
+            aviso.style.display = "flex";
             aviso.style.opacity = "1";
             
             if (result.redirectUrl) {
