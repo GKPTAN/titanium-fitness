@@ -14,7 +14,7 @@ export const loginController = async (req, res) => {
   try {
     const unverifiedUser = await findUnverifiedUserByEmail(email_user);
     if (unverifiedUser?.length > 0) {
-        return res.status(200).json({ redirectUrl: "titanium-fitness/src/pages/confirm_email.html"});
+        return res.status(200).json({ redirectUrl: "confirm_email.html"});
     };
 
     const user = await findUserByEmail(email_user);
@@ -51,7 +51,7 @@ export const loginController = async (req, res) => {
         };
       }
 
-      res.status(200).json({ redirectUrl: "titanium-fitness/src/pages/home.html" });
+      res.status(200).json({ redirectUrl: "home.html" });
     } else {
       res.status(404).json({ message: "Usuário não encontrado" });
     }
@@ -144,7 +144,7 @@ export const registroController = async (req, res) => {
 
     res.status(200).json({
       message: "Cadastro realizado com sucesso.",
-      redirectUrl: "titanium-fitness/src/pages/confirm_email.html",
+      redirectUrl: "confirm_email.html",
     });
   } catch (error) {
     console.error("Erro ao registrar usuário: ", error);
@@ -189,7 +189,7 @@ export const verificationController = async (req, res) => {
 
       res.status(200).json({
         message: "E-mail verificado com sucesso",
-        redirectUrl: "titanium-fitness/src/pages/login.html",
+        redirectUrl: "login.html",
       });
     } else {
       return res.status(404).json({ message: "Tempo de solicitação expirado!" });
