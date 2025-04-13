@@ -46,7 +46,7 @@ document.querySelector("form").addEventListener("submit", async function(event) 
     };
     
     try {
-        const response = await fetch("https://titanium-fitness.vercel.app/api/auth/registr", {
+        const response = await fetch("https://titanium-fitness.vercel.app/api/auth/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
